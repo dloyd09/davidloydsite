@@ -3,5 +3,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--davidloyd.com--dloyd09.aem.live/
-- After: https://<branch>--davidloyd.com--dloyd09.aem.live/
+- Before: https://main--davidloydsite--dloyd09.aem.live/
+- After: https://<branch>--davidloydsite--dloyd09.aem.live/
