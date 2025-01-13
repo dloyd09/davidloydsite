@@ -1,0 +1,45 @@
+.jumbotron {
+    background-color: #f8f9fa;
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  
+  .jumbotron h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .jumbotron-heading {
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .jumbotron .lead {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+  }
+  
+  .jumbotron img.profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .jumbotron .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+  }
+  
+  .jumbotron .btn:hover {
+    background-color: #0056b3;
+  }
+  

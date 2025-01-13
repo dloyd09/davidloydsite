@@ -13,6 +13,16 @@ import {
   loadCSS,
 } from './aem.js';
 
+
+
+// Initialize Bootstrap tooltips
+document.addEventListener('DOMContentLoaded', () => {
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  tooltipTriggerList.forEach((tooltipTriggerEl) => {
+    new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+});
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -27,6 +37,7 @@ function buildHeroBlock(main) {
     main.prepend(section);
   }
 }
+
 
 /**
  * load fonts.css and set a session storage flag
