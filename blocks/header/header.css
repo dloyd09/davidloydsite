@@ -1,6 +1,6 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: #343A40; 
+  background-color: black; 
   width: 100%;
   z-index: 2;
   position: fixed;
@@ -13,7 +13,7 @@ header nav {
     'hamburger brand tools' var(--nav-height)
     'sections sections sections' 1fr / auto 1fr auto;
   align-items: center;
-  gap: 0 325px;
+  gap: 0 25px;
   margin: auto;
   max-width: 1248px;
   height: var(--nav-height);
@@ -30,21 +30,6 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
-@media (width >= 900px) {
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 200px;
-    max-width: 1264px;
-    padding: 0 32px;
-  }
-
-  header nav[aria-expanded='true'] {
-    min-height: 0;
-    overflow: visible;
-  }
-}
-
 header nav p {
   margin: 0;
   line-height: 1;
@@ -59,15 +44,15 @@ header nav a:any-link {
 header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
+  width: 22px;
   display: flex;
-  align-items: center;
 }
 
 header nav .nav-hamburger button {
   height: 22px;
   margin: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 15px;
   padding: 0;
   background-color: var(--background-color);
   color: inherit;
@@ -129,13 +114,6 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
-}
-
 /* brand */
 header .nav-brand {
   grid-area: brand;
@@ -143,6 +121,7 @@ header .nav-brand {
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+  display: flex;
 }
 
 header nav .nav-brand img {
@@ -163,12 +142,15 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
+  
 }
 
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
+  justify-content: center;
+  padding-right: 100px;
 }
 
 header nav .nav-sections ul > li {
@@ -183,7 +165,42 @@ header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
 }
 
-@media (width >= 900px) {
+/* tools */
+header nav .nav-tools {
+  grid-area: tools;
+}
+
+.nav-hamburger-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.nav-hamburger-icon img {
+  width: 100%;
+  height: auto;
+}
+
+/* For viewports 900px and up */
+@media (min-width: 900px) {
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 200px;
+    max-width: 1264px;
+    padding: 0 32px;
+  }
+
+  header nav[aria-expanded='true'] {
+    min-height: 0;
+    overflow: visible;
+  }
+
+  header nav .nav-hamburger {
+    display: none;
+    visibility: hidden;
+  }
+
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -264,7 +281,10 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
-/* tools */
-header nav .nav-tools {
-  grid-area: tools;
+/* For viewports less than 900px */
+@media (max-width: 899px) {
+  header .nav-brand {
+    justify-content: center;
+    flex-basis: auto;
+  }
 }

@@ -24,8 +24,8 @@
   --link-hover-color: #1d3ecf;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: proxima nova light, roboto, roboto-fallback, sans-serif;
+  --heading-font-family: proxima nova light, roboto-condensed, roboto-condensed-fallback, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -46,13 +46,13 @@
 
 /* fallback fonts */
 @font-face {
-  font-family: roboto-condensed-fallback;
+  font-family: 'proxima nova light';
   size-adjust: 88.82%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: roboto-fallback;
+  font-family: 'proxima nova light';
   size-adjust: 99.529%;
   src: local('Arial');
 }
@@ -79,7 +79,7 @@ body {
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: var(--body-font-family);
+  font-family: 'proxima nova light';
   font-size: var(--body-font-size-m);
   line-height: 1.6;
 }
@@ -110,7 +110,7 @@ h5,
 h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
-  font-family: var(--heading-font-family);
+  font-family: 'proxima nova light';
   font-weight: 600;
   line-height: 1.25;
   scroll-margin: 40px;
@@ -179,7 +179,7 @@ button {
   border: 2px solid transparent;
   border-radius: 2.4em;
   padding: 0.5em 1.2em;
-  font-family: var(--body-font-family);
+  font-family: 'proxima nova light';
   font-style: normal;
   font-weight: 500;
   line-height: 1.25;
@@ -231,7 +231,7 @@ main img {
   width: 100%;
 }
 
-/* sections 
+.sections 
 main > .section {
   margin: 40px 0;
 }
@@ -252,10 +252,10 @@ main > .section:first-of-type {
   }
 } */
 
-/* section metadata 
+.section metadata 
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
-} */
+}
