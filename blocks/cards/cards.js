@@ -53,7 +53,7 @@ export default function decorate(block) {
     // const cardFooter = document.createElement('div');
     // cardFooter.classList.add('d-flex', 'justify-content-between', 'align-items-center');
 
-    //// Buttons
+    // Buttons
     //  const btnGroup = document.createElement('div');
     //  btnGroup.classList.add('btn-group');
 
