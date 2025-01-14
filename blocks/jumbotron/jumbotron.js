@@ -41,6 +41,15 @@ export default function decorate(block) {
     container.append(text);
   }
 
+  // Static Text
+  if (data.staticText) {
+    const staticText = document.createElement('h3');
+    text.classList.add('staticText', 'text-muted');
+    text.textContent = data.staticText;
+    console.log(data.staticText);
+    container.append(staticText);
+  }
+
   // Profile Image
   if (data['profile-image']) {
     const img = document.createElement('img');
