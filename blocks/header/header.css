@@ -1,5 +1,4 @@
 /* header and nav layout */
-/* var(--background-color) */
 header .nav-wrapper {
   background-color: #343A40; 
   width: 100%;
@@ -53,7 +52,7 @@ header nav p {
 
 /* currentcolor */
 header nav a:any-link {
-  color: #ffffff;
+  color: #fff;
 }
 
 /* hamburger */
@@ -157,7 +156,7 @@ header nav .nav-sections {
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
-  color:#ffffff;
+  color:#fff;
 }
 
 header nav[aria-expanded='true'] .nav-sections {
