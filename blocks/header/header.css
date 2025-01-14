@@ -171,7 +171,7 @@ header nav .nav-tools {
 }
 
 /* For viewports 900px and up */
-@media screen and (min-width: 900px) {
+@media screen and (width >= 900px) {
   header nav {
     display: flex;
     justify-content: space-between;
@@ -271,7 +271,7 @@ header nav .nav-tools {
 }
 
 /* For viewports less than 900px */
-@media screen and (max-width: 899px) {
+@media screen and (width <= 899px) {
   header .nav-brand {
     justify-content: center;
     flex-basis: auto;
