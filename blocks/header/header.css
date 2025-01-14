@@ -1,6 +1,7 @@
 /* header and nav layout */
+/* var(--background-color) */
 header .nav-wrapper {
-  background-color: #343A40; /*var(--background-color)*/;
+  background-color: #343A40; 
   width: 100%;
   z-index: 2;
   position: fixed;
@@ -50,8 +51,9 @@ header nav p {
   line-height: 1;
 }
 
+/* currentcolor */
 header nav a:any-link {
-  color: #ffffff /*currentcolor*/;
+  color: #ffffff;
 }
 
 /* hamburger */
