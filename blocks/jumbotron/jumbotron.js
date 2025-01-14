@@ -51,13 +51,13 @@ export default function decorate(block) {
   }
 
   // Button
-  //if (data['button-text']) {
+  //  if (data['button-text']) {
   //  const button = document.createElement('a');
   //  button.href = '#'; // You can update this to a real link
   //  button.classList.add('btn', 'btn-primary', 'my-2');
   //  button.textContent = data['button-text'];
   //  container.append(button);
-  //}
+  //  }
 
   // Append container to section and replace block content
   section.append(container);

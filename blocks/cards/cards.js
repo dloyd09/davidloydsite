@@ -6,7 +6,7 @@ export default function decorate(block) {
   rows.forEach((row) => {
     const cells = [...row.children];
     const card = {
-      //text: cells[0]?.textContent?.trim() || '',
+      // text: cells[0]?.textContent?.trim() || '',
       text: cells[1]?.textContent?.trim() || '',
       image: cells[0]?.querySelector('img')?.getAttribute('src') || null,
     };
@@ -50,36 +50,36 @@ export default function decorate(block) {
     }
 
     // Footer
-    //const cardFooter = document.createElement('div');
-    //cardFooter.classList.add('d-flex', 'justify-content-between', 'align-items-center');
-//
+    // const cardFooter = document.createElement('div');
+    // cardFooter.classList.add('d-flex', 'justify-content-between', 'align-items-center');
+
     //// Buttons
-    //const btnGroup = document.createElement('div');
-    //btnGroup.classList.add('btn-group');
-//
-    //const viewBtn = document.createElement('button');
-    //viewBtn.type = 'button';
-    //viewBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
-    //viewBtn.textContent = 'View';
-//
-    //const editBtn = document.createElement('button');
-    //editBtn.type = 'button';
-    //editBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
-    //editBtn.textContent = 'Edit';
-//
-    //btnGroup.appendChild(viewBtn);
-    //btnGroup.appendChild(editBtn);
-    //cardFooter.appendChild(btnGroup);
+    //  const btnGroup = document.createElement('div');
+    //  btnGroup.classList.add('btn-group');
 
-    // Time
-    //if (card.time) {
-    //  const smallText = document.createElement('small');
-    //  smallText.classList.add('text-muted');
-    //  smallText.textContent = card.time;
-    //  cardFooter.appendChild(smallText);
-    //}
-
-    //cardBody.appendChild(cardFooter);
+    //  const viewBtn = document.createElement('button');
+    //  viewBtn.type = 'button';
+    //  viewBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
+    //  viewBtn.textContent = 'View';
+  
+    //  const editBtn = document.createElement('button');
+    //  editBtn.type = 'button';
+    //  editBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
+    //  editBtn.textContent = 'Edit';
+  
+    //  btnGroup.appendChild(viewBtn);
+    //  btnGroup.appendChild(editBtn);
+    //  cardFooter.appendChild(btnGroup);
+  
+    //   Time
+    //  if (card.time) {
+    //    const smallText = document.createElement('small');
+    //    smallText.classList.add('text-muted');
+    //    smallText.textContent = card.time;
+    //    cardFooter.appendChild(smallText);
+    //  }
+  
+    //  cardBody.appendChild(cardFooter);
     cardElement.appendChild(cardBody);
     col.appendChild(cardElement);
     row.appendChild(col);
