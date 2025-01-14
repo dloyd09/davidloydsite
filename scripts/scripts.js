@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof bootstrap !== 'undefined') {
       new bootstrap.Tooltip(tooltipTriggerEl); // Initialize the tooltip
     } else {
-      console.warn('Bootstrap is not defined.');
+      console.error('Bootstrap is not defined.');
     }
   });
 });
