@@ -75,9 +75,9 @@ export default function decorate(block) {
         // Dynamically calculate animation duration and steps
         const animationDuration = wordLength * 0.2; // 0.2s per character
 
-        //reset animation
+        // reset animation
         dynamicText.style.animation = 'none';
-        dynamicText.offsetHeight;
+        const height = dynamicText.offsetHeight;
         dynamicText.style.animation = `typing ${animationDuration}s steps(${wordLength}, end), blink 0.5s step-end infinite`;
 
         // Set the new word
