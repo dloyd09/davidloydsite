@@ -1,4 +1,4 @@
-// add delayed functionality here
+// Add delayed functionality here
 // Lazy-load Bootstrap JavaScript
 (function loadBootstrapJS() {
   const script = document.createElement('script');
@@ -6,4 +6,4 @@
   script.integrity = 'sha384-kQtW33rZJAHjgefvhyyzcGF8Tx82fJb5hAKhuXW2iRFoZKUtD3r4LFp2kg53Ugf8';
   script.crossOrigin = 'anonymous';
   document.body.appendChild(script);
-  })();
+}());
