@@ -61,16 +61,13 @@ export default function decorate(block) {
     // viewBtn.type = 'button';
     // viewBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
     // viewBtn.textContent = 'View';
-  
     // const editBtn = document.createElement('button');
     // editBtn.type = 'button';
     // editBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
     // editBtn.textContent = 'Edit';
-  
     // btnGroup.appendChild(viewBtn);
     // btnGroup.appendChild(editBtn);
     // cardFooter.appendChild(btnGroup);
-  
     // Time
     // if (card.time) {
     //   const smallText = document.createElement('small');
@@ -78,7 +75,6 @@ export default function decorate(block) {
     //   smallText.textContent = card.time;
     //   cardFooter.appendChild(smallText);
     //  }
-  
     // cardBody.appendChild(cardFooter);
     cardElement.appendChild(cardBody);
     col.appendChild(cardElement);
