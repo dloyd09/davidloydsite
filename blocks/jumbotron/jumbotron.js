@@ -13,6 +13,8 @@ export default function decorate(block) {
       if (img) {
         data[key] = img.getAttribute('src'); // Store the image source
       }
+    } else if (key === 'dynamictext') {
+      data[key] = value.split('\n').map((item) => item.trim()); // Split into an array of items
     } else {
       data[key] = value;
     }
@@ -41,32 +43,56 @@ export default function decorate(block) {
     container.append(text);
   }
 
-  // Static Text
-  if (data.staticText) {
-    const staticText = document.createElement('h3');
-    text.classList.add('staticText', 'text-muted');
-    text.textContent = data.staticText;
-    console.log(data.staticText);
-    container.append(staticText);
-  }
+  // Profile Wrapper (Profile Image + Dynamic Text)
+  if (data['profile-image'] || data.dynamictext?.length) {
+    const profileWrapper = document.createElement('div');
+    profileWrapper.classList.add('profile-wrapper');
 
-  // Profile Image
-  if (data['profile-image']) {
-    const img = document.createElement('img');
-    img.src = data['profile-image'];
-    img.alt = 'Profile Image';
-    img.classList.add('profile-image');
-    container.append(img);
-  }
+    // Profile Image
+    if (data['profile-image']) {
+      const img = document.createElement('img');
+      img.src = data['profile-image'];
+      img.alt = 'Profile Image';
+      img.classList.add('profile-image');
+      profileWrapper.append(img);
+    }
 
-  // Button
-  //  if (data['button-text']) {
-  //  const button = document.createElement('a');
-  //  button.href = '#'; // You can update this to a real link
-  //  button.classList.add('btn', 'btn-primary', 'my-2');
-  //  button.textContent = data['button-text'];
-  //  container.append(button);
-  //  }
+    // Dynamic Text
+    if (data.dynamictext && data.dynamictext.length) {
+      const dynamicTextWrapper = document.createElement('div');
+      dynamicTextWrapper.classList.add('dynamic-text-wrapper');
+      const dynamicText = document.createElement('span');
+      dynamicText.classList.add('dynamic-text');
+      dynamicTextWrapper.append(dynamicText);
+      profileWrapper.append(dynamicTextWrapper);
+
+      // JavaScript to handle typing animation
+      let index = 0;
+      const typeText = () => {
+        const currentWord = data.dynamictext[index];
+        const wordLength = currentWord.length;
+
+        // Dynamically calculate animation duration and steps
+        const animationDuration = wordLength * 0.2; // 0.2s per character
+
+        //reset animation
+        dynamicText.style.animation = 'none';
+        dynamicText.offsetHeight;
+        dynamicText.style.animation = `typing ${animationDuration}s steps(${wordLength}, end), blink 0.5s step-end infinite`;
+
+        // Set the new word
+        dynamicText.textContent = currentWord;
+
+        // Increment index for the next word
+        index = (index + 1) % data.dynamictext.length;
+      };
+
+      typeText();
+      setInterval(typeText, 3000); // Change text every 2 seconds
+    }
+
+    container.append(profileWrapper);
+  }
 
   // Append container to section and replace block content
   section.append(container);
