@@ -170,17 +170,6 @@ header nav .nav-tools {
   grid-area: tools;
 }
 
-.nav-hamburger-icon {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
-.nav-hamburger-icon img {
-  width: 100%;
-  height: auto;
-}
-
 /* For viewports 900px and up */
 @media (min-width: 900px) {
   header nav {
