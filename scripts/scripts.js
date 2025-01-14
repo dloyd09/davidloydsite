@@ -13,19 +13,6 @@ import {
   loadCSS,
 } from './aem.js';
 
-// Initialize Bootstrap tooltips
-document.addEventListener('DOMContentLoaded', () => {
-  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  tooltipTriggerList.forEach((tooltipTriggerEl) => {
-    // Ensure bootstrap is properly imported or available globally
-    if (typeof bootstrap !== 'undefined') {
-      new bootstrap.Tooltip(tooltipTriggerEl); // Initialize the tooltip
-    } else {
-      console.error('Bootstrap is not defined.');
-    }
-  });
-});
-
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
