@@ -77,7 +77,7 @@ export default function decorate(block) {
 
         // reset animation
         dynamicText.style.animation = 'none';
-        const height = dynamicText.offsetHeight;
+        dynamicText.getBoundingClientRect();
         dynamicText.style.animation = `typing ${animationDuration}s steps(${wordLength}, end), blink 0.5s step-end infinite`;
 
         // Set the new word
