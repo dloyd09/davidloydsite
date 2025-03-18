@@ -66,29 +66,52 @@ export default function decorate(block) {
       dynamicTextWrapper.append(dynamicText);
       profileWrapper.append(dynamicTextWrapper);
 
-      // JavaScript to handle typing animation
-      let index = 0;
-      const typeText = () => {
-        const currentWord = data.dynamictext[index];
-        const wordLength = currentWord.length;
-
-        // Dynamically calculate animation duration and steps
-        const animationDuration = wordLength * 0.2; // 0.2s per character
-
-        // reset animation
-        dynamicText.style.animation = 'none';
-        dynamicText.getBoundingClientRect();
-        dynamicText.style.animation = `typing ${animationDuration}s steps(${wordLength}, end), blink 0.5s step-end infinite`;
-
-        // Set the new word
-        dynamicText.textContent = currentWord;
-
-        // Increment index for the next word
-        index = (index + 1) % data.dynamictext.length;
+      let currentIndex = 0;
+      let isDeleting = false;
+      let isAnimating = false;
+      
+      const animateText = async () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        const words = data.dynamictext;
+        const currentWord = words[currentIndex];
+        
+        if (!isDeleting) {
+          // Set the text content but keep it hidden initially
+          dynamicText.textContent = currentWord;
+          dynamicText.classList.remove('deleting');
+          dynamicText.classList.add('typing');
+          
+          // Wait for typing animation
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          // Pause at the end of the word
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          isDeleting = true;
+        } else {
+          dynamicText.classList.remove('typing');
+          dynamicText.classList.add('deleting');
+          
+          // Wait for delete animation
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Prepare for next word
+          currentIndex = (currentIndex + 1) % words.length;
+          isDeleting = false;
+          
+          // Small pause before next word
+          await new Promise(resolve => setTimeout(resolve, 200));
+        }
+        
+        isAnimating = false;
+        // Schedule next animation
+        requestAnimationFrame(animateText);
       };
 
-      typeText();
-      setInterval(typeText, 3000); // Change text every 2 seconds
+      // Start the animation
+      requestAnimationFrame(animateText);
     }
 
     container.append(profileWrapper);

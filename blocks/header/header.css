@@ -1,8 +1,8 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color:black;
+  background-color: black;
   width: 100%;
-  z-index: 2;
+  z-index: 1000;
   position: fixed;
 }
 
@@ -35,9 +35,27 @@ header nav p {
   line-height: 1;
 }
 
-/* currentcolor */
-header nav a:any-link {
-  color: #fff;
+/* Navigation Links */
+header nav a:any-link,
+header nav .nav-sections a:any-link {
+  color: white;
+  text-decoration: none;
+}
+
+header nav a:hover,
+header nav .nav-sections a:hover,
+header nav a:focus,
+header nav .nav-sections a:focus,
+header nav a:active,
+header nav .nav-sections a:active {
+  color: white;
+  text-decoration: none;
+}
+
+/* Remove any inherited link colors */
+header nav .nav-sections .default-content-wrapper a:any-link {
+  color: white !important;
+  text-decoration: none;
 }
 
 /* hamburger */
