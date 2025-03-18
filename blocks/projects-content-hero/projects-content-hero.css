@@ -27,13 +27,13 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 48px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 70%) 100%);
   color: white;
   border-radius: 8px;
 }
 
 .projects-content-hero-title-wrapper {
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
 }
 
 .projects-content-hero-title-link,
@@ -64,7 +64,7 @@
   line-height: 1.6;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .projects-content-hero {
     height: 50vh;
     min-height: 300px;

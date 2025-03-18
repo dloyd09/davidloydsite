@@ -1,12 +1,12 @@
 export default function decorate(block) {
   const rows = [...block.children];
-  
+
   // Get content from the first row
   const heroContent = {
     image: rows[0]?.children[0]?.querySelector('img')?.getAttribute('src') || '',
     title: rows[0]?.children[1]?.querySelector('a')?.textContent?.trim() || rows[0]?.children[1]?.textContent?.trim() || '',
     description: rows[0]?.children[2]?.textContent?.trim() || '',
-    link: rows[0]?.children[1]?.querySelector('a')?.href || ''
+    link: rows[0]?.children[1]?.querySelector('a')?.href || '',
   };
 
   // Create hero structure
@@ -34,11 +34,11 @@ export default function decorate(block) {
       const titleLink = document.createElement('a');
       titleLink.href = heroContent.link;
       titleLink.classList.add('projects-content-hero-title-link');
-      
+
       const title = document.createElement('h1');
       title.classList.add('projects-content-hero-title');
       title.textContent = heroContent.title;
-      
+
       titleLink.appendChild(title);
       titleWrapper.appendChild(titleLink);
     } else {
@@ -47,7 +47,7 @@ export default function decorate(block) {
       title.textContent = heroContent.title;
       titleWrapper.appendChild(title);
     }
-    
+
     content.appendChild(titleWrapper);
   }
 
@@ -60,4 +60,4 @@ export default function decorate(block) {
 
   hero.appendChild(content);
   block.replaceWith(hero);
-} 
+}

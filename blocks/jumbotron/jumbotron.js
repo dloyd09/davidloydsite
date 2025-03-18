@@ -1,12 +1,12 @@
 export default function decorate(block) {
   const rows = [...block.children];
-  
+
   // Get content from the first row
   const content = {
     title: rows[0]?.children[0]?.textContent?.trim() || '',
     text: rows[0]?.children[1]?.textContent?.trim() || '',
     profileImage: rows[0]?.children[2]?.querySelector('img')?.getAttribute('src') || '',
-    dynamictext: rows[0]?.children[3]?.textContent?.split(',').map(text => text.trim()) || []
+    dynamictext: rows[0]?.children[3]?.textContent?.split(',').map((text) => text.trim()) || [],
   };
 
   // Create jumbotron structure
@@ -66,13 +66,13 @@ export default function decorate(block) {
         if (currentLength === 0) {
           isDeleting = false;
           currentIndex = (currentIndex + 1) % content.dynamictext.length;
-          await new Promise((resolve) => setTimeout(resolve, 200));
+          setTimeout(() => {}, 200);
         }
       } else {
         dynamicText.textContent = currentWord.substring(0, currentLength + 1);
         if (currentLength === currentWord.length) {
           isDeleting = true;
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          setTimeout(() => {}, 1000);
         }
       }
 

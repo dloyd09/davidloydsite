@@ -36,17 +36,25 @@ header nav p {
 }
 
 /* Navigation Links */
-header nav a:any-link,
-header nav .nav-sections a:any-link {
+header nav a:any-link {
   color: white;
   text-decoration: none;
 }
 
 header nav a:hover,
-header nav .nav-sections a:hover,
 header nav a:focus,
+header nav a:active {
+  color: white;
+  text-decoration: none;
+}
+
+header nav .nav-sections a:any-link {
+  color: white;
+  text-decoration: none;
+}
+
+header nav .nav-sections a:hover,
 header nav .nav-sections a:focus,
-header nav a:active,
 header nav .nav-sections a:active {
   color: white;
   text-decoration: none;
