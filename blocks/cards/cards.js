@@ -12,6 +12,7 @@ export default function decorate(block) {
     const img = card.querySelector('img');
     const link = card.querySelector('a');
     const text = card.querySelector('p:not(:first-child)');
+    const url = card.children[3]?.textContent?.trim() || '#';
 
     if (img) {
       const imageWrapper = document.createElement('div');
@@ -19,7 +20,7 @@ export default function decorate(block) {
 
       const imageLink = document.createElement('a');
       imageLink.classList.add('card-image-link');
-      imageLink.href = link ? link.href : '#';
+      imageLink.href = url;
 
       const cardImage = document.createElement('img');
       cardImage.classList.add('card-img-top');
@@ -38,7 +39,10 @@ export default function decorate(block) {
       const title = document.createElement('h3');
       title.classList.add('card-title');
       title.textContent = link.textContent;
-      cardBody.appendChild(title);
+      const titleLink = document.createElement('a');
+      titleLink.href = url;
+      titleLink.appendChild(title);
+      cardBody.appendChild(titleLink);
     }
 
     if (text) {
