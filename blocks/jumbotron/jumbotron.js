@@ -1,123 +1,86 @@
 export default function decorate(block) {
-  const rows = [...block.children]; // Get all rows in the block table
-  const data = {};
+  const rows = [...block.children];
+  
+  // Get content from the first row
+  const content = {
+    title: rows[0]?.children[0]?.textContent?.trim() || '',
+    text: rows[0]?.children[1]?.textContent?.trim() || '',
+    profileImage: rows[0]?.children[2]?.querySelector('img')?.getAttribute('src') || '',
+    dynamictext: rows[0]?.children[3]?.textContent?.split(',').map(text => text.trim()) || []
+  };
 
-  // Parse the table rows into a structured data object
-  rows.forEach((row) => {
-    const cells = [...row.children];
-    const key = cells[0]?.textContent?.trim().toLowerCase(); // Use first cell as key
-    const value = cells[1]?.textContent?.trim(); // Use second cell as value (if any)
+  // Create jumbotron structure
+  const jumbotron = document.createElement('div');
+  jumbotron.classList.add('jumbotron');
 
-    if (key === 'profile-image') {
-      const img = cells[1]?.querySelector('img'); // Get the image element
-      if (img) {
-        data[key] = img.getAttribute('src'); // Store the image source
-      }
-    } else if (key === 'dynamictext') {
-      data[key] = value.split('\n').map((item) => item.trim()); // Split into an array of items
-    } else {
-      data[key] = value;
-    }
-  });
-
-  // Build the Jumbotron structure
-  const section = document.createElement('section');
-  section.classList.add('jumbotron', 'text-center');
-
-  const container = document.createElement('div');
-  container.classList.add('container');
-
-  // Title
-  if (data.title) {
+  // Add title
+  if (content.title) {
     const title = document.createElement('h1');
-    title.classList.add('jumbotron-heading');
-    title.textContent = data.title;
-    container.append(title);
+    title.classList.add('jumbotron-title');
+    title.textContent = content.title;
+    jumbotron.appendChild(title);
   }
 
-  // Text
-  if (data.text) {
+  // Add text
+  if (content.text) {
     const text = document.createElement('p');
-    text.classList.add('lead', 'text-muted');
-    text.textContent = data.text;
-    container.append(text);
+    text.classList.add('jumbotron-text');
+    text.textContent = content.text;
+    jumbotron.appendChild(text);
   }
 
-  // Profile Wrapper (Profile Image + Dynamic Text)
-  if (data['profile-image'] || data.dynamictext?.length) {
+  // Add profile image
+  if (content.profileImage) {
     const profileWrapper = document.createElement('div');
     profileWrapper.classList.add('profile-wrapper');
 
-    // Profile Image
-    if (data['profile-image']) {
-      const img = document.createElement('img');
-      img.src = data['profile-image'];
-      img.alt = 'Profile Image';
-      img.classList.add('profile-image');
-      profileWrapper.append(img);
-    }
+    const img = document.createElement('img');
+    img.classList.add('profile-image');
+    img.src = content.profileImage;
+    img.alt = 'Profile Image';
+    profileWrapper.appendChild(img);
 
-    // Dynamic Text
-    if (data.dynamictext && data.dynamictext.length) {
-      const dynamicTextWrapper = document.createElement('div');
-      dynamicTextWrapper.classList.add('dynamic-text-wrapper');
-      const dynamicText = document.createElement('span');
-      dynamicText.classList.add('dynamic-text');
-      dynamicTextWrapper.append(dynamicText);
-      profileWrapper.append(dynamicTextWrapper);
-
-      let currentIndex = 0;
-      let isDeleting = false;
-      let isAnimating = false;
-      
-      const animateText = async () => {
-        if (isAnimating) return;
-        isAnimating = true;
-        
-        const words = data.dynamictext;
-        const currentWord = words[currentIndex];
-        
-        if (!isDeleting) {
-          // Set the text content but keep it hidden initially
-          dynamicText.textContent = currentWord;
-          dynamicText.classList.remove('deleting');
-          dynamicText.classList.add('typing');
-          
-          // Wait for typing animation
-          await new Promise(resolve => setTimeout(resolve, 1500));
-          
-          // Pause at the end of the word
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
-          isDeleting = true;
-        } else {
-          dynamicText.classList.remove('typing');
-          dynamicText.classList.add('deleting');
-          
-          // Wait for delete animation
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
-          // Prepare for next word
-          currentIndex = (currentIndex + 1) % words.length;
-          isDeleting = false;
-          
-          // Small pause before next word
-          await new Promise(resolve => setTimeout(resolve, 200));
-        }
-        
-        isAnimating = false;
-        // Schedule next animation
-        requestAnimationFrame(animateText);
-      };
-
-      // Start the animation
-      requestAnimationFrame(animateText);
-    }
-
-    container.append(profileWrapper);
+    jumbotron.appendChild(profileWrapper);
   }
 
-  // Append container to section and replace block content
-  section.append(container);
-  block.replaceWith(section);
+  // Add dynamic text
+  if (content.dynamictext.length > 0) {
+    const dynamicTextWrapper = document.createElement('div');
+    dynamicTextWrapper.classList.add('dynamic-text-wrapper');
+
+    const dynamicText = document.createElement('span');
+    dynamicText.classList.add('dynamic-text');
+    dynamicTextWrapper.appendChild(dynamicText);
+
+    jumbotron.appendChild(dynamicTextWrapper);
+
+    let currentIndex = 0;
+    let isDeleting = false;
+
+    const animateText = async () => {
+      const currentWord = content.dynamictext[currentIndex];
+      const currentLength = dynamicText.textContent.length;
+
+      if (isDeleting) {
+        dynamicText.textContent = currentWord.substring(0, currentLength - 1);
+        if (currentLength === 0) {
+          isDeleting = false;
+          currentIndex = (currentIndex + 1) % content.dynamictext.length;
+          await new Promise((resolve) => setTimeout(resolve, 200));
+        }
+      } else {
+        dynamicText.textContent = currentWord.substring(0, currentLength + 1);
+        if (currentLength === currentWord.length) {
+          isDeleting = true;
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+      }
+
+      requestAnimationFrame(() => animateText());
+    };
+
+    animateText();
+  }
+
+  block.replaceWith(jumbotron);
 }
