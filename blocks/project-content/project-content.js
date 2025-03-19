@@ -1,25 +1,24 @@
 export default function decorate(block) {
+  // Get all rows from the block
   const rows = [...block.children];
-  const content = {
-    title: rows[0]?.children[0]?.textContent?.trim() || '',
-    text: rows[0]?.children[1]?.textContent?.trim() || '',
-  };
-
+  
   const projectContent = document.createElement('div');
   projectContent.classList.add('project-content');
 
-  if (content.title) {
-    const title = document.createElement('h2');
-    title.classList.add('project-content-title');
-    title.textContent = content.title;
-    projectContent.appendChild(title);
-  }
-
-  if (content.text) {
-    const text = document.createElement('p');
-    text.classList.add('project-content-text');
-    text.textContent = content.text;
-    projectContent.appendChild(text);
+  // Skip the header row (project-content) and get content from next row
+  if (rows.length > 0) {
+    const contentRow = rows[0];  // Get the first row
+    if (contentRow && contentRow.children.length > 0) {
+      const text = contentRow.children[0].textContent;  // Get text from first column
+      
+      // Split into paragraphs and create elements
+      const paragraphs = text.split('\n').filter(p => p.trim());
+      paragraphs.forEach(paragraph => {
+        const p = document.createElement('p');
+        p.textContent = paragraph.trim();
+        projectContent.appendChild(p);
+      });
+    }
   }
 
   block.replaceWith(projectContent);

@@ -5,11 +5,14 @@
 }
 
 .project-content p {
+  margin: 0 0 1em 0;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
-  color: var(--text-color);
-  margin-bottom: 1em;
+}
+
+.project-content p:last-child {
+  margin-bottom: 0;
 }
 
 /* Remove or comment out all the other complex styling */ 
