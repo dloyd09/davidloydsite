@@ -1,63 +1,15 @@
 .project-content {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 24px 48px;
-}
-
-.project-content h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 48px 0 24px;
-  color: var(--heading-color);
-}
-
-.project-content h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 32px 0 16px;
-  color: var(--heading-color);
+  padding: 0 24px;
 }
 
 .project-content p {
-  font-size: 1.125rem;
-  line-height: 1.8;
-  margin: 0 0 24px;
-  color: var(--text-color);
-}
-
-.project-content img {
-  width: 100%;
-  border-radius: 8px;
-  margin: 32px 0;
-}
-
-.project-content ul,
-.project-content ol {
-  margin: 24px 0;
-  padding-left: 24px;
-}
-
-.project-content li {
-  margin-bottom: 12px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
   line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 1em;
 }
 
-@media (width <= 768px) {
-  .project-content {
-    padding: 0 16px 32px;
-  }
-
-  .project-content h2 {
-    font-size: 1.75rem;
-    margin: 32px 0 16px;
-  }
-
-  .project-content h3 {
-    font-size: 1.25rem;
-    margin: 24px 0 12px;
-  }
-
-  .project-content p {
-    font-size: 1rem;
-  }
-} 
+/* Remove or comment out all the other complex styling */ 

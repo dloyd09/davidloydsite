@@ -1,12 +1,18 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Get content from the first row
+  // Get content from the document structure
   const content = {
-    title: rows[0]?.children[0]?.textContent?.trim() || '',
-    text: rows[0]?.children[1]?.textContent?.trim() || '',
-    profileImage: rows[0]?.children[2]?.querySelector('img')?.getAttribute('src') || '',
-    dynamictext: rows[0]?.children[3]?.textContent?.split(',').map((text) => text.trim()) || [],
+    title: [...rows].find(row => row.children[0]?.textContent?.trim() === 'title')
+      ?.children[1]?.textContent?.trim() || '',
+    text: [...rows].find(row => row.children[0]?.textContent?.trim() === 'text')
+      ?.children[1]?.textContent?.trim() || '',
+    profileImage: [...rows].find(row => row.children[0]?.textContent?.trim() === 'profile-image')
+      ?.children[1]?.querySelector('img')?.getAttribute('src') || '',
+    dynamicText: [...rows].find(row => row.children[0]?.textContent?.trim() === 'dynamicText')
+      ?.children[1]?.textContent?.split('\n')
+      .map(text => text.trim())
+      .filter(text => text) || [],
   };
 
   // Create jumbotron structure
@@ -29,7 +35,7 @@ export default function decorate(block) {
     jumbotron.appendChild(text);
   }
 
-  // Add profile image with rotating border
+  // Add profile image
   if (content.profileImage) {
     const profileWrapper = document.createElement('div');
     profileWrapper.classList.add('profile-wrapper');
@@ -41,66 +47,80 @@ export default function decorate(block) {
     img.classList.add('profile-image');
     img.src = content.profileImage;
     img.alt = 'Profile Image';
-
+    
     profileContainer.appendChild(img);
     profileWrapper.appendChild(profileContainer);
     jumbotron.appendChild(profileWrapper);
   }
 
-  // Add dynamic text with typing animation
-  if (content.dynamictext.length > 0) {
+  // Add dynamic text
+  if (content.dynamicText.length > 0) {
     const dynamicTextWrapper = document.createElement('div');
     dynamicTextWrapper.classList.add('dynamic-text-wrapper');
 
-    const dynamicText = document.createElement('span');
-    dynamicText.classList.add('dynamic-text');
-    dynamicTextWrapper.appendChild(dynamicText);
-
+    const txtType = document.createElement('span');
+    txtType.classList.add('txt-type');
+    txtType.setAttribute('data-wait', '3000');
+    txtType.setAttribute('data-words', JSON.stringify(content.dynamicText));
+    
+    dynamicTextWrapper.appendChild(txtType);
     jumbotron.appendChild(dynamicTextWrapper);
 
-    let currentIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 100;
-    const deletingSpeed = 50;
-    const pauseBeforeDelete = 2000;
-    const pauseBeforeNextWord = 500;
-
-    const animateText = async () => {
-      const currentWord = content.dynamictext[currentIndex];
-      const currentLength = dynamicText.textContent.length;
-
-      if (isDeleting) {
-        dynamicText.classList.remove('typing');
-        dynamicText.classList.add('deleting');
-        dynamicText.textContent = currentWord.substring(0, currentLength - 1);
-
-        if (currentLength === 0) {
-          isDeleting = false;
-          dynamicText.classList.remove('deleting');
-          currentIndex = (currentIndex + 1) % content.dynamictext.length;
-          setTimeout(animateText, pauseBeforeNextWord);
-          return;
-        }
-
-        setTimeout(animateText, deletingSpeed);
-      } else {
-        dynamicText.classList.add('typing');
-        dynamicText.classList.remove('deleting');
-        dynamicText.textContent = currentWord.substring(0, currentLength + 1);
-
-        if (currentLength === currentWord.length) {
-          isDeleting = true;
-          setTimeout(animateText, pauseBeforeDelete);
-          return;
-        }
-
-        setTimeout(animateText, typingSpeed);
-      }
-    };
-
-    // Start the animation
-    setTimeout(animateText, 500);
+    // Initialize TypeWriter
+    new TypeWriter(txtType, content.dynamicText, 3000);
   }
 
   block.replaceWith(jumbotron);
+}
+
+class TypeWriter {
+  constructor(txtElement, words, wait = 3000) {
+    this.txtElement = txtElement;
+    this.words = words;
+    this.txt = '';
+    this.wordIndex = 0;
+    this.wait = parseInt(wait, 10);
+    this.isDeleting = false;
+    // Add new properties for smoother animation
+    this.minTypeSpeed = 100;  // Faster base typing speed
+    this.maxTypeSpeed = 150;  // Cap for random variation
+    this.deleteSpeed = 50;    // Faster deleting
+    this.startDelay = 1000;   // Initial delay
+    this.type();
+  }
+
+  getRandomSpeed() {
+    // Add human-like randomness to typing speed
+    return Math.random() * (this.maxTypeSpeed - this.minTypeSpeed) + this.minTypeSpeed;
+  }
+
+  type() {
+    const current = this.wordIndex % this.words.length;
+    const fullTxt = this.words[current];
+
+    if(this.isDeleting) {
+      this.txt = fullTxt.substring(0, this.txt.length - 1);
+    } else {
+      this.txt = fullTxt.substring(0, this.txt.length + 1);
+    }
+
+    this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
+
+    // Dynamic speed adjustments
+    let typeSpeed = this.isDeleting ? this.deleteSpeed : this.getRandomSpeed();
+
+    // Handle state changes
+    if(!this.isDeleting && this.txt === fullTxt) {
+      // Longer pause at end of word
+      typeSpeed = this.wait;
+      this.isDeleting = true;
+    } else if(this.isDeleting && this.txt === '') {
+      this.isDeleting = false;
+      this.wordIndex++;
+      // Shorter pause before next word
+      typeSpeed = 700;
+    }
+
+    setTimeout(() => this.type(), typeSpeed);
+  }
 }

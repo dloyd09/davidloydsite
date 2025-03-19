@@ -229,7 +229,7 @@ main img {
 
 .sections 
 main > .section {
-  margin: 40px 0;
+  margin: 24px 0;
 }
 
 main > .section > div {
@@ -253,5 +253,14 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: 24px 0;
+}
+
+.section.highlight {
+  margin: 0;
+  padding: 24px 0;
+}
+
+.cards-wrapper {
+  margin: 24px auto;
 }
