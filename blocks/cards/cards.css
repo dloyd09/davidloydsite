@@ -111,6 +111,18 @@
   color: var(--heading-color);
 }
 
+.cards-wrapper .card-body a:any-link {
+  color: var(--heading-color, #000);
+}
+
+.cards-wrapper .card-body a:hover {
+  color: var(--heading-color, #000);
+}
+
+.cards-wrapper .card-image-link:any-link {
+  color: inherit;
+}
+
 @media (width <= 1200px) {
   .cards-wrapper {
     max-width: 900px;

@@ -11,8 +11,9 @@ export default function decorate(block) {
 
     const img = card.querySelector('img');
     const link = card.querySelector('a');
-    const text = card.querySelector('p:not(:first-child)');
     const url = card.children[3]?.textContent?.trim() || '#';
+    const title = card.children[1]?.textContent?.trim() || '';
+    const description = card.children[2]?.textContent?.trim() || '';
 
     if (img) {
       const imageWrapper = document.createElement('div');
@@ -35,21 +36,21 @@ export default function decorate(block) {
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
 
-    if (link) {
-      const title = document.createElement('h3');
-      title.classList.add('card-title');
-      title.textContent = link.textContent;
+    if (title) {
+      const titleElement = document.createElement('h3');
+      titleElement.classList.add('card-title');
+      titleElement.textContent = title;
       const titleLink = document.createElement('a');
       titleLink.href = url;
-      titleLink.appendChild(title);
+      titleLink.appendChild(titleElement);
       cardBody.appendChild(titleLink);
     }
 
-    if (text) {
-      const cardText = document.createElement('p');
-      cardText.classList.add('card-text');
-      cardText.textContent = text.textContent;
-      cardBody.appendChild(cardText);
+    if (description) {
+      const descriptionElement = document.createElement('p');
+      descriptionElement.classList.add('card-text');
+      descriptionElement.textContent = description;
+      cardBody.appendChild(descriptionElement);
     }
 
     cardDiv.appendChild(cardBody);
