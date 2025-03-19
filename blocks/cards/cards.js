@@ -10,7 +10,6 @@ export default function decorate(block) {
     cardDiv.classList.add('card');
 
     const img = card.querySelector('img');
-    const link = card.querySelector('a');
     const url = card.children[3]?.textContent?.trim() || '#';
     const title = card.children[1]?.textContent?.trim() || '';
     const description = card.children[2]?.textContent?.trim() || '';

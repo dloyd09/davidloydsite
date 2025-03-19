@@ -41,7 +41,7 @@ export default function decorate(block) {
     img.classList.add('profile-image');
     img.src = content.profileImage;
     img.alt = 'Profile Image';
-    
+
     profileContainer.appendChild(img);
     profileWrapper.appendChild(profileContainer);
     jumbotron.appendChild(profileWrapper);
@@ -60,10 +60,10 @@ export default function decorate(block) {
 
     let currentIndex = 0;
     let isDeleting = false;
-    let typingSpeed = 100;
-    let deletingSpeed = 50;
-    let pauseBeforeDelete = 2000;
-    let pauseBeforeNextWord = 500;
+    const typingSpeed = 100;
+    const deletingSpeed = 50;
+    const pauseBeforeDelete = 2000;
+    const pauseBeforeNextWord = 500;
 
     const animateText = async () => {
       const currentWord = content.dynamictext[currentIndex];
@@ -73,7 +73,7 @@ export default function decorate(block) {
         dynamicText.classList.remove('typing');
         dynamicText.classList.add('deleting');
         dynamicText.textContent = currentWord.substring(0, currentLength - 1);
-        
+
         if (currentLength === 0) {
           isDeleting = false;
           dynamicText.classList.remove('deleting');
@@ -81,19 +81,19 @@ export default function decorate(block) {
           setTimeout(animateText, pauseBeforeNextWord);
           return;
         }
-        
+
         setTimeout(animateText, deletingSpeed);
       } else {
         dynamicText.classList.add('typing');
         dynamicText.classList.remove('deleting');
         dynamicText.textContent = currentWord.substring(0, currentLength + 1);
-        
+
         if (currentLength === currentWord.length) {
           isDeleting = true;
           setTimeout(animateText, pauseBeforeDelete);
           return;
         }
-        
+
         setTimeout(animateText, typingSpeed);
       }
     };
