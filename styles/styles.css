@@ -250,17 +250,27 @@ main > .section:first-of-type {
 
 .section metadata, 
 main .section.light,
-main .section.highlight {
+.section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 24px 0;
 }
 
-.section.highlight {
+main .section.highlight {
+  background-color: #f8f9fa;  /* Very light grey */
   margin: 0;
   padding: 24px 0;
 }
 
+/* Cards wrapper base styles */
 .cards-wrapper {
-  margin: 24px auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 32px;
+  margin: 48px auto;
+}
+
+/* More specific styles for highlighted section */
+.section.highlight .cards-wrapper {
+  background-color: transparent;
 }

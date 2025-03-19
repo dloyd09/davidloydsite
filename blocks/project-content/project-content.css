@@ -5,7 +5,7 @@
 }
 
 .project-content p {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;

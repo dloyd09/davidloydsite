@@ -76,8 +76,8 @@
 }
 
 @keyframes blink-caret {
-  from, to { border-color: #777 }
-  50% { border-color: transparent }
+  0%, 100% { border-color: #777; }
+  50% { border-color: transparent; }
 }
 
 @media(min-width: 768px) {
@@ -92,5 +92,10 @@
   .dynamic-text {
     font-size: 2rem;
   }
+}
+  
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
   
